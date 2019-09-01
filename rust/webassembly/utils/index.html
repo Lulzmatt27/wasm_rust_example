@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>WebAssembly</title>
+	<script>
+		const appendNumberToBody = (number) =>{
+			const text = document.createTextNode(number);
+			document.body.appendChild(text);
+		}
+
+		const importOjbect = {
+			env: {
+				appendNumberToBody: appendNumberToBody,
+				alert: alert
+			}
+		}
+		WebAssembly.instantiateStreaming(fetch("utils.gc.wasm"), importOjbect)
+			.then(wasmModule =>{
+				wasmModule.instance.exports.run();
+			})
+	</script>
+</head>
+<body>
+
+</body>
+</html>
